@@ -1,5 +1,3 @@
-# start process
-
 '''
 Razie Hyria
 CMPSC 472 - Operating Systems
@@ -7,7 +5,9 @@ Lab 2 - Spawning Child Processes
 2/3/23
 
 Programming Lab: Parent Process starts two Child Processes
-“Processes” are what the operating system calls a program. Students shall write a program that will Start two other processes.
+“Processes” are what the operating system calls a program. 
+Students shall write a program that will Start two other processes, and keep the program running
+and communicating until both processes are complete/terminated.
 
 '''
 
@@ -38,19 +38,20 @@ if the processes we start ared still running and havent been closed by the user
 
 Ref:
 https://stackoverflow.com/a/64707896/17628672'''
+# checks task list to validate if app is running
 
 def process_exists(process_name):
-    progs = str(subprocess.check_output('tasklist'))
-    if process_name in progs:
+    progs = str(subprocess.check_output('tasklist')) # tasklist is a list of all the actively runnning apps/programs on your pc
+    if process_name in progs: # if its name is on the list, its running
         return True
-    else:
+    else: # otherwise its not running/closed
         return False
 
 
 def starting_subprocess():
-    isRunning = True # variable to enter while loop
+    isRunning = True # variable to enter loop
 
-    while isRunning: # starting the loop
+    while isRunning: # starting the MAIN program loop
 
         # opening the apps
         print("Initializing..") 
@@ -81,7 +82,7 @@ def starting_subprocess():
         
         # check if the programs were closed/ are running
         process_running = True
-        while process_running:
+        while process_running: #consider this the "wait" function
 
              # checks and alerts which app is open/closed 
             if process_exists("CalculatorApp.exe") == False: #ensuring calculator is running
@@ -106,7 +107,7 @@ def starting_subprocess():
         print("\n\nExiting program")
         isRunning = False # exit nested while loop
 
-
+'''Run the program here'''
 if __name__ == "__main__" :
     starting_subprocess()
     if error_flag:
